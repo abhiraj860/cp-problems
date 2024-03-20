@@ -1,0 +1,7 @@
+g++ practice.cpp -o practice && ./practice
+
+
+g++ test.cpp -o test && ./test
+
+
+g++ test1.cpp -o test1 && ./test1
