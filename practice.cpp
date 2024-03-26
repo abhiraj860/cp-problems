@@ -14,23 +14,14 @@ int32_t main() {
         int n, k;
         cin >> n >> k;
         int mid;
-        int s = 1;
-        int e = 5e9 + 2;
-        int ans = 0;
-        while(s <= e) {
-            int mid = s + (e - s) / 2;
-            int cnt = mid - (mid / n);
-            if(cnt == k) {
-                ans = mid;
-                e = mid - 1;
-            } else if (cnt < k) {
-                s = mid + 1;
-            } else {
-                e = mid - 1;
-            }
+        int x = (k / (n - 1));
+        int rem = k - (n - 1) * x;
+        if(rem) {
+            cout << (rem + (n * x)) << endl;
+        } else {
+            cout << (n  * x - 1) << endl;
         }
         t--;
-        cout << ans << endl;
     }
     
     return 0;
