@@ -2,53 +2,17 @@
 #define int long long int
 using namespace std;
 
-bool getSolve(vector<vector<int>> & vec, int i, int j, int n) {
-    int row = i;
-    int col = j;
-    while(row >= 0) {
-        if(vec[row][col] == 1) return false;
-        row--;
-    }
-    row = i;
-    col = j;
-    while(row >= 0 && col >= 0) {
-        if(vec[row][col] == 1) return false;
-        row--;
-        col--; 
-    }
-    row = i;
-    col = j;
-    while(row >= 0 && col < n) {
-        if(vec[row][col] == 1) return false;
-        row--;
-        col++; 
-    }
-    return true;
-}
-
-void solve(vector<vector<int>> & grid, int i, int j, int n) {
-    if(i >= n) {
-        for(int i = 0; i < n; i++) {
-            for(int j = 0; j < n; j++) {
-                cout << grid[i][j] << " ";
-            }
-            cout << endl;
+bool binaryDec(int i) {
+    string str = to_string(i);
+    bool flag = true;
+    for(int i = 0; i < str.size(); i++) {
+        if(str[i] > '1' && str[i] <= '9') {
+            flag = false;
+            break;
         }
-        cout << endl;
-        return;
     }
-    
-    if(j >= n) solve(grid, i + 1, 0, n);
-
-    for(int k = 0; k < n; k++) {
-        bool getRes = getSolve(grid, i, k, n);
-        if(getRes) {
-            grid[i][k] = 1;
-            solve(grid, i + 1, 0, n);
-        } 
-        grid[i][k] = 0;
-    }
-    return;
+    // cout << str << "----" << flag << endl;
+    return flag;
 }
 
 int32_t main() {
@@ -56,9 +20,29 @@ int32_t main() {
         freopen("input.txt", "r", stdin);
         freopen("output.txt", "w", stdout);
     #endif
-    int n;
-    cin >> n;
-    vector<vector<int>>grid(n, vector<int>(n, 0));
-    solve(grid, 0, 0, n);
+
+    int t;
+    cin >> t;
+    while(t--) {
+        int n;
+        cin >> n;
+        while(n % 10 == 0) {
+            n = n / 10;
+        }
+        if(binaryDec(n)) {
+            cout << "YES" << endl;
+            continue;
+        }
+        for(int i = 3; i <= n; i += 2) {
+            if(binaryDec(i) && ((n % i) == 0)) {
+                while(n > 0 && (n % i == 0)) {
+                    n = n / i;
+                }
+            }
+        }
+        if(binaryDec(n)) cout << "YES" << endl;
+        else cout << "NO" << endl;  
+    }   
+
     return 0;
 }
