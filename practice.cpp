@@ -10,7 +10,7 @@ int32_t main() {
     int inputs;
     cin >> inputs;
     vector<pair<int, int>> adjMat[inputs + 1];
-    for(int i = 0; i <= inputs; i++) {
+    for(int i = 0; i < inputs; i++) {
         int p, q, wt;
         cin >> p >> q >> wt;
         adjMat[p].push_back({q, wt});
